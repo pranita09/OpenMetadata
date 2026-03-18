@@ -198,7 +198,7 @@ export const addTeamAsReviewer = async (
   isSelectableInsideForm = false
 ) => {
   const teamsResponse = page.waitForResponse(
-    '/api/v1/search/query?q=&index=team_search_index&from=0&size=*&sort_field=displayName.keyword&sort_order=asc'
+    '/api/v1/search/query?q=&index=team&from=0&size=*&sort_field=displayName.keyword&sort_order=asc'
   );
 
   const teamsSearchResponse = page.waitForResponse(
@@ -1267,7 +1267,7 @@ export const createDescriptionTaskForGlossary = async (
     await assigneeField.click();
 
     const userSearchResponse = page.waitForResponse(
-      `/api/v1/search/query?q=*${value.assignee}**&index=user_search_index%2Cteam_search_index*`
+      `/api/v1/search/query?q=*${value.assignee}**&index=user%2Cteam*`
     );
     await assigneeField.fill(value.assignee);
     await userSearchResponse;
@@ -1321,7 +1321,7 @@ export const createTagTaskForGlossary = async (
     );
     await assigneeField.click();
     const userSearchResponse = page.waitForResponse(
-      `/api/v1/search/query?q=*${value.assignee}**&index=user_search_index%2Cteam_search_index*`
+      `/api/v1/search/query?q=*${value.assignee}**&index=user%2Cteam*`
     );
     await assigneeField.fill(value.assignee);
     await userSearchResponse;
@@ -1341,7 +1341,7 @@ export const createTagTaskForGlossary = async (
     await suggestTags.click();
 
     const querySearchResponse = page.waitForResponse(
-      `/api/v1/search/query?q=*${value.tag}*&index=tag_search_index&*`
+      `/api/v1/search/query?q=*${value.tag}*&index=tag&*`
     );
     await suggestTags.fill(value.tag ?? '');
 
@@ -1584,7 +1584,7 @@ export const addMultiOwnerInDialog = async (data: {
 
   for (const ownerName of owners) {
     const searchOwner = page.waitForResponse(
-      'api/v1/search/query?q=*&index=user_search_index*'
+      'api/v1/search/query?q=*&index=user*'
     );
     await page.locator('[data-testid="owner-select-users-search-bar"]').clear();
     await page.fill('[data-testid="owner-select-users-search-bar"]', ownerName);

@@ -535,7 +535,7 @@ test.describe('Glossary tests', () => {
         await page.click('[data-testid="tag-selector"] #tagsForm_tags');
 
         const glossaryRequest = page.waitForResponse(
-          `/api/v1/search/query?q=*&index=glossary_term_search_index&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
+          `/api/v1/search/query?q=*&index=glossaryTerm&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
         );
         await page.type(
           '[data-testid="tag-selector"] #tagsForm_tags',
@@ -552,7 +552,7 @@ test.describe('Glossary tests', () => {
         await page.click('[data-testid="tag-selector"] #tagsForm_tags');
 
         const glossaryRequest2 = page.waitForResponse(
-          `/api/v1/search/query?q=*&index=glossary_term_search_index&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
+          `/api/v1/search/query?q=*&index=glossaryTerm&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
         );
         await page.type(
           '[data-testid="tag-selector"] #tagsForm_tags',
@@ -587,7 +587,7 @@ test.describe('Glossary tests', () => {
         await page.click('[data-testid="tag-selector"] #tagsForm_tags');
 
         const glossaryRequest3 = page.waitForResponse(
-          `/api/v1/search/query?q=*&index=glossary_term_search_index&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
+          `/api/v1/search/query?q=*&index=glossaryTerm&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
         );
         await page.type(
           '[data-testid="tag-selector"] #tagsForm_tags',
@@ -604,7 +604,7 @@ test.describe('Glossary tests', () => {
         await page.click('[data-testid="tag-selector"] #tagsForm_tags');
 
         const glossaryRequest4 = page.waitForResponse(
-          `/api/v1/search/query?q=*&index=glossary_term_search_index&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
+          `/api/v1/search/query?q=*&index=glossaryTerm&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
         );
         await page.type(
           '[data-testid="tag-selector"] #tagsForm_tags',
@@ -656,7 +656,7 @@ test.describe('Glossary tests', () => {
         await page.click('[data-testid="tag-selector"]');
 
         const glossaryRequest5 = page.waitForResponse(
-          `/api/v1/search/query?q=*&index=glossary_term_search_index&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
+          `/api/v1/search/query?q=*&index=glossaryTerm&from=0&size=25&deleted=false&track_total_hits=true&getHierarchy=true`
         );
         await page.type(
           '[data-testid="tag-selector"] #tagsForm_tags',
