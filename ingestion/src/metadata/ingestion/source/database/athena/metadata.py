@@ -147,11 +147,31 @@ class AthenaSource(ExternalTableLineageMixin, CommonDbSourceService):
     def query_table_names_and_types(
         self, schema_name: str
     ) -> Iterable[TableNameAndType]:
-        """Return tables as external"""
-
+        """Return tables with proper type detection using a single Glue API pass."""
+        if self.glue_client:
+            try:
+                results = []
+                paginator = self.glue_client.get_paginator("get_tables")
+                for page in paginator.paginate(DatabaseName=schema_name):
+                    for table in page.get("TableList", []):
+                        params = table.get("Parameters", {})
+                        table_type = (
+                            TableType.Iceberg
+                            if params.get("table_type") == "ICEBERG"
+                            else TableType.External
+                        )
+                        results.append(
+                            TableNameAndType(name=table["Name"], type_=table_type)
+                        )
+                return results
+            except Exception as exc:
+                logger.debug(traceback.format_exc())
+                logger.warning(
+                    f"Failed to fetch Glue table metadata for schema [{schema_name}]: {exc}"
+                )
         return [
             TableNameAndType(name=name, type_=TableType.External)
-            for name in self.inspector.get_table_names(schema_name)
+            for name in self.inspector.get_table_names(schema_name) or []
         ]
 
     def get_table_partition_details(
